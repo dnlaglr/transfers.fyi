@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+const plugin = require('tailwindcss/plugin');
 
 const config: Config = {
   content: [
@@ -11,8 +12,30 @@ const config: Config = {
       colors: {
         'text-main': '#020617',
       },
+      keyframes: {
+        'scrolling-header-animation': {
+          '0%': { top: '0em' },
+          '25%': { top: '-1.27em' },
+          '50%': { top: '-2.54em' },
+          '75%, 100%': { top: '-3.81em' },
+        }
+      },
+      animation: {
+        'scrolling-header': 'scrolling-header-animation 12s forwards'
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchUtilities, theme }: {matchUtilities: any, theme: any}) {
+      matchUtilities(
+        {
+          'animate-delay': (value: any) => ({
+            animationDelay: value,
+          }),
+        },
+        { values: theme('transitionDelay') }
+      )
+    })
+  ],
 };
 export default config;
