@@ -18,10 +18,21 @@ const config: Config = {
           '25%': { top: '-1.27em' },
           '50%': { top: '-2.54em' },
           '75%, 100%': { top: '-3.81em' },
+        },
+        'slide-up-fade-in': {
+          '0%': {
+            opacity: '0',
+            transform: 'translate(0px, 10px)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translate(0px, 0px)',
+          },
         }
       },
       animation: {
-        'scrolling-header': 'scrolling-header-animation 12s forwards'
+        'scrolling-header': 'scrolling-header-animation 12s forwards',
+        'fade-in': 'slide-up-fade-in 1s linear forwards'
       }
     },
   },
