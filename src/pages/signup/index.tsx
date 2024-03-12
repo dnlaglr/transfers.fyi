@@ -1,13 +1,10 @@
 import FormProvider from '@/features/signup/FormContext';
-import UserInfo from '@/features/signup/UserInfo';
-import { useState } from 'react';
+import FormManager from '@/features/signup/FormManager';
 
 export default function SignUp() {
-  const [formStep, setFormStep] = useState(0);
-
   return (
     <FormProvider>
-      <UserInfo setFormStep={setFormStep} />
+      <FormManager />
     </FormProvider>
   )
 }
