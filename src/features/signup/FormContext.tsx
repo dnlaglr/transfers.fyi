@@ -1,4 +1,11 @@
-import { ChangeEvent, ReactNode, createContext, useState } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useState,
+} from 'react';
 
 interface FormState {
   email: string;
@@ -6,8 +13,9 @@ interface FormState {
   confirmationCode: string;
 }
 
-export interface FormContextType {
+interface FormContextType {
   formState: FormState;
+  setFormState: Dispatch<SetStateAction<FormState>>;
   updateForm: (e: ChangeEvent<HTMLInputElement>) => void;
   currentStep: number;
   incrementStep: () => void;
@@ -18,43 +26,52 @@ export const FormContext = createContext<FormContextType>({
   formState: {
     email: '',
     password: '',
-    confirmationCode: ''
+    confirmationCode: '',
   },
+  setFormState: () => {},
   updateForm: () => {},
   currentStep: 0,
   incrementStep: () => {},
-  decrementStep: () => {}
+  decrementStep: () => {},
 });
 
-export default function FormProvider({ children } : { children: ReactNode }) {
+export default function FormProvider({ children }: { children: ReactNode }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [formState, setFormState] = useState<FormState>({
     email: '',
     password: '',
-    confirmationCode: ''
+    confirmationCode: '',
   });
 
   function updateForm(e: ChangeEvent<HTMLInputElement>) {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
-      [name]: value
-    }))
+      [name]: value,
+    }));
   }
 
   function incrementStep() {
-    console.log('running')
-    setCurrentStep(prevStep => prevStep + 1);
+    setCurrentStep((prevStep) => prevStep + 1);
   }
 
   function decrementStep() {
-    setCurrentStep(prevStep => (prevStep > 0 ? prevStep - 1 : prevStep));
+    setCurrentStep((prevStep) => (prevStep > 0 ? prevStep - 1 : prevStep));
   }
 
   return (
-    <FormContext.Provider value={{ formState, updateForm, currentStep, incrementStep, decrementStep }}>
+    <FormContext.Provider
+      value={{
+        formState,
+        setFormState,
+        updateForm,
+        currentStep,
+        incrementStep,
+        decrementStep,
+      }}
+    >
       {children}
     </FormContext.Provider>
-  )
+  );
 }

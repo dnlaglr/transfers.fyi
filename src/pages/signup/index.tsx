@@ -6,5 +6,5 @@ export default function SignUp() {
     <FormProvider>
       <FormManager />
     </FormProvider>
-  )
+  );
 }
