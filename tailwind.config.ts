@@ -12,7 +12,7 @@ const config: Config = {
     extend: {
       colors: {
         'text-main': '#020617',
-        'transfers': '#00bf78'
+        transfers: '#00bf78',
       },
       keyframes: {
         'scrolling-header-animation': {
@@ -30,16 +30,22 @@ const config: Config = {
             opacity: '1',
             transform: 'translate(0px, 0px)',
           },
-        }
+        },
       },
       animation: {
         'scrolling-header': 'scrolling-header-animation 12s forwards',
-        'fade-in': 'slide-up-fade-in 1s linear forwards'
-      }
+        'fade-in': 'slide-up-fade-in 1s linear forwards',
+      },
     },
   },
   plugins: [
-    plugin(function ({ matchUtilities, theme }: {matchUtilities: any, theme: any}) {
+    plugin(function ({
+      matchUtilities,
+      theme,
+    }: {
+      matchUtilities: any;
+      theme: any;
+    }) {
       matchUtilities(
         {
           'animate-delay': (value: any) => ({
@@ -47,8 +53,8 @@ const config: Config = {
           }),
         },
         { values: theme('transitionDelay') }
-      )
-    })
+      );
+    }),
   ],
 };
 export default config;
