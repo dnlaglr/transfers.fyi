@@ -4,6 +4,7 @@ const plugin = require('tailwindcss/plugin');
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/features/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
@@ -11,6 +12,7 @@ const config: Config = {
     extend: {
       colors: {
         'text-main': '#020617',
+        'transfers': '#00bf78'
       },
       keyframes: {
         'scrolling-header-animation': {
