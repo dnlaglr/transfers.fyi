@@ -1,5 +1,6 @@
 import { signIn } from 'aws-amplify/auth';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
 
@@ -97,6 +98,12 @@ export default function SignIn() {
           >
             Sign In
           </button>
+          <span className='mt-6 text-center text-sm'>
+            Don&apos;t have an account yet?{' '}
+            <Link href='/signup' className='text-transfers'>
+              Sign Up
+            </Link>
+          </span>
         </div>
       </div>
     </div>
