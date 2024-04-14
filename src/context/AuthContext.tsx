@@ -18,9 +18,9 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     async function checkAuthState() {
       try {
-        const { profileID } = await getCurrentUser();
+        const { userId } = await getCurrentUser();
         setIsAuthenticated(true);
-        setProfileID(profileID);
+        setProfileID(userId);
       } catch (err) {
         setIsAuthenticated(false);
       }
