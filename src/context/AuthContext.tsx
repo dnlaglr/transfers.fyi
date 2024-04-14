@@ -3,20 +3,24 @@ import { ReactNode, createContext, useEffect, useState } from 'react';
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  profileID: string;
 }
 
 export const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
+  profileID: '',
 });
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [profileID, setProfileID] = useState('');
 
   useEffect(() => {
     async function checkAuthState() {
       try {
-        await getCurrentUser();
+        const { profileID } = await getCurrentUser();
         setIsAuthenticated(true);
+        setProfileID(profileID);
       } catch (err) {
         setIsAuthenticated(false);
       }
@@ -26,7 +30,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated }}>
+    <AuthContext.Provider value={{ isAuthenticated, profileID }}>
       {children}
     </AuthContext.Provider>
   );

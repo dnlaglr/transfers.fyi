@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useContext } from 'react';
 
 export default function Navbar() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, profileID } = useContext(AuthContext);
 
   return (
     <nav className='flex w-full flex-row items-center justify-center px-12 py-4'>
@@ -32,12 +32,21 @@ export default function Navbar() {
           </Link>
         </div>
         <div className='text-base font-semibold text-text-main'>
-          <Link
-            href='/signin'
-            className={`${isAuthenticated ? 'hidden' : ''} mr-4 rounded-xl border border-slate-300 px-4 py-2 hover:bg-neutral-100`}
-          >
-            Sign In
-          </Link>
+          {isAuthenticated ? (
+            <Link
+              href={`/user/profile/${profileID}`}
+              className='mr-4 rounded-xl border border-slate-300 px-4 py-2 hover:bg-neutral-100'
+            >
+              Profile
+            </Link>
+          ) : (
+            <Link
+              href='/signin'
+              className='mr-4 rounded-xl border border-slate-300 px-4 py-2 hover:bg-neutral-100'
+            >
+              Sign In
+            </Link>
+          )}
           <Link
             href='/dashboard'
             className='rounded-xl bg-text-main px-4 py-2 text-white hover:bg-black'
